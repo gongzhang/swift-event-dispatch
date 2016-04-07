@@ -1,5 +1,10 @@
-# swift-event-dispatch
-**A simple observer-pattern helper for Swift. Extremely useful when implement event callbacks, publish/subscribe pattern, and MVC/MVP/MVVM.**
+# INTRODUCTION
+
+`EventDispatch` is a helper class that can be used to implement **observer pattern** in Swift. It provides an extremely convenience way to implementing **callbacks**, **event publish-subscribe**, and **MVC/MVP/MVVM patterns**.
+
+It's also a **replacement for KVO** (Key-Value-Observing, a traditional Objective-C feature).
+
+# EXAMPLE
 
 Want to get notified when the value changes?
 
@@ -7,7 +12,7 @@ Want to get notified when the value changes?
 var price: Double = 100.0
 ```
 
-Define the event like this:
+On the **publisher** side, define the event like this:
 
 ```swift
 // define the event
@@ -19,7 +24,7 @@ var price: Double = 100.0 {
 }
 ```
 
-and observe the event like this:
+On the **subscriber** side, observe the event like this:
 
 ```swift
 onPriceChange += {
