@@ -5,14 +5,16 @@ public class EventDispatch<Event>: EventDispatchProtocol {
     public typealias HandlerIdentifier = Int
     
     private typealias Handler = Event -> ()
-    private var handlers = [HandlerIdentifier : Handler]()
+    private var handlerIds = [HandlerIdentifier]()
+    private var handlers = [Handler]()
     private var lastId: HandlerIdentifier = 0
     
     public init() {}
     
     public func addHandler(handler: Event -> ()) -> HandlerIdentifier {
         lastId += 1
-        handlers[lastId] = handler
+        handlerIds.append(lastId)
+        handlers.append(handler)
         return lastId
     }
     
@@ -25,12 +27,18 @@ public class EventDispatch<Event>: EventDispatchProtocol {
     }
     
     public func removeHandler(handler: HandlerIdentifier) -> Bool {
-        return handlers.removeValueForKey(handler) != nil
+        if let index = handlerIds.indexOf(handler) {
+            handlerIds.removeAtIndex(index)
+            let _ = handlers.removeAtIndex(index)
+            return true
+        } else {
+            return false
+        }
     }
     
     public func notify(event: Event) {
-        let copiedHandlers = handlers.sort { $0.0 < $1.0 }
-        for (_, handler) in copiedHandlers {
+        let copiedHandlers = handlers
+        for handler in copiedHandlers {
             handler(event)
         }
     }
