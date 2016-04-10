@@ -39,6 +39,8 @@ price = 90.0 // will print 'the price has changed to 90.0'
 
 Copy `EventDispatch.swift` and `EventDispatchOperator.swift`(optional) to your project. And here you go.
 
+(The source files are located in folder `EventDispatch.playground/Sources/`.)
+
 # HOW TO USE
 
 ## 1. Define/trigger an event (Publisher side)
@@ -167,3 +169,5 @@ If you modify the handlers in a handler, the modification will take effect **at 
 # CONTACT
 
 gong@me.com
+
+
